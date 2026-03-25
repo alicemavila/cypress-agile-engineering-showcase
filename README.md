@@ -122,29 +122,42 @@ The following User Stories were mapped to guide the automation of this project:
 
 ## 📂 Project Structure
 ```text
+.github/workflows/    # CI/CD Pipeline configuration
 cypress/
-  ├── e2e/           # Test files organized by User Story
-  ├── fixtures/      # JSON data for Data-Driven Testing
-  ├── support/       # Custom Commands and Global Configurations
+  ├── e2e/            # Test files organized by Epic/Feature
+  ├── fixtures/       # Static data for tests
+  ├── support/        # Reusable layer
+  │   ├── pages/      # Page Object Model (UI Selectors & Actions)
+  │   ├── commands.js # API Custom Commands (Data setup)
+  └── ...
 
 ---
 
-## ⚙️ 3. Getting Started
+## 🚀 3. Advanced Engineering Patterns Applied
+
+* **API Seeding:** Tests use `cy.request()` to create the necessary state (users/products) before UI interaction, ensuring test atomicity and speed.
+* **POM (Page Object Model):** Decouples test logic from UI selectors using a dedicated page layer, making maintenance easier and the code more readable.
+* **Smart Synchronization:** Strategic use of dynamic timeouts and state assertions instead of hardcoded `cy.wait()`, reducing flakiness.
+* **Secure CI/CD:** Integration with GitHub Secrets to inject environment variables during pipeline execution, preventing credential leaks.
+
+---
+
+## ⚙️ 4. Getting Started
 
 ### Prerequisites
 * [Node.js](https://nodejs.org/) (Version 18 or higher)
 * [Cypress](https://www.cypress.io/)
 
 ### Installation
-1.  Clone this repository:
+1. Clone this repository:
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/cypress-agile-eng-showcase.git](https://github.com/YOUR_USERNAME/cypress-agile-eng-showcase.git)
+    git clone [https://github.com/alicemavila/cypress-agile-eng-showcase.git](https://github.com/alicemavila/cypress-agile-eng-showcase.git)
     ```
-2.  Navigate to the project folder:
+2. Navigate to the project folder:
     ```bash
     cd cypress-agile-eng-showcase
     ```
-3.  Install dependencies:
+3. Install dependencies:
     ```bash
     npm install
     ```
@@ -162,5 +175,5 @@ cypress/
 ---
 
 ## 👨‍💻 Author
-**Alice Monteiro** - QA Engineer
+**Alice Monteiro** - QA Engineer  
 [LinkedIn](https://www.linkedin.com/in/alice-m-223157119/) | [GitHub](https://github.com/alicemavila)

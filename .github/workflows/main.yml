@@ -25,6 +25,11 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
+        env:
+          # É AQUI que a mágica acontece: conectamos os Secrets do GitHub ao Cypress
+          CYPRESS_userEmail: ${{ secrets.USER_EMAIL }}
+          CYPRESS_userPassword: ${{ secrets.USER_PASSWORD }}
+          CYPRESS_userName: ${{ secrets.USER_NAME }}
 
       - name: Upload Screenshots (on failure) 📸
         uses: actions/upload-artifact@v4

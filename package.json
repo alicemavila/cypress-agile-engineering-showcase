@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cy:open": "cypress open",
-    "cy:run": "cypress run"
+"cy:open": "cypress open",
+  "cy:run": "cypress run",
+  "test:chrome": "cypress run --browser chrome",
+  "test:auth": "cypress run --spec 'cypress/e2e/auth/*'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
     "cypress": "^15.12.0"
   }
 }

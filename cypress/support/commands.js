@@ -10,6 +10,7 @@ Cypress.Commands.add('setupUserViaApi', (user) => {
     },
     failOnStatusCode: false 
   });
+
 });
 
 Cypress.Commands.add('loginViaApi', (email, password) => {
