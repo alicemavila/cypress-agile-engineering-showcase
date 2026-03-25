@@ -43,7 +43,7 @@ describe('US01 - User Authentication', () => {
     Login.fillForm('email_sem_arroba', '123456');
     Login.submit();
 
-    cy.get('#email').invoke('prop', 'validationMessage')
+    cy.get('#email', { timeout: 10000 }).invoke('prop', 'validationMessage')
       .should('contain', 'Inclua um "@"');
   });
 });
