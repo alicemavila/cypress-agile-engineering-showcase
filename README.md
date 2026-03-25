@@ -1,11 +1,8 @@
 # 🚀 Cypress Agile Engineering Showcase
 
-This project is a professional Quality Engineering (QA) portfolio focused on **End-to-End (E2E) testing** using **Cypress**. The target application is [ServeRest](https://front.serverest.dev/), a dedicated e-commerce simulation environment for testing practices.
+This project is a professional Quality Engineering (QA) portfolio focused on **End-to-End (E2E) testing** using **Cypress**. The target application is [ServeRest](https://front.serverest.dev/), a dedicated e-commerce simulation environment.
 
-This repository demonstrates a full-cycle Agile development approach:
-1.  **Requirements Engineering:** User Stories mapping and BDD (Behavior Driven Development).
-2.  **Quality Engineering:** Strategic focus on business-critical flows and test stability.
-3.  **Software Development:** Clean code, reusable architecture (Custom Commands/Fixtures), and CI/CD integration.
+This repository demonstrates a full-cycle Agile development approach, moving beyond simple UI automation to a robust, data-driven architecture.
 
 ---
 
@@ -115,39 +112,43 @@ The following User Stories were mapped to guide the automation of this project:
 ## 🛠️ 2. Architecture & Tech Stack
 
 * **Testing Framework:** [Cypress](https://www.cypress.io/)
-* **Language:** JavaScript (Node.js)
-* **Design Patterns:** Custom Commands & App Actions for high reusability.
-* **Data Management:** Fixtures (JSON) for dynamic test data.
-* **CI/CD:** [GitHub Actions](https://github.com/features/actions) for automated test execution on every push.
+* **Data Generation:** [Faker.js](https://fakerjs.dev/) (Ensures test isolation with unique data for every execution).
+* **Design Patterns:** * **Hybrid Approach:** POM (Page Object Model) for UI interactions + Custom Commands for API shortcuts.
+    * **Data Setup via API:** Bypassing UI for pre-conditions to increase execution speed.
+* **Security:** Environment variables managed via `cypress.env.json` and GitHub Secrets.
+* **CI/CD:** [GitHub Actions] for automated regression on every push.
 
 ## 📂 Project Structure
-
 ```
-.github/workflows/    # CI/CD Pipeline configuration
+.github/workflows/    # CI/CD Pipeline (Automated Regression)
 cypress/
-  ├── e2e/            # Test files organized by Epic/Feature
-  ├── fixtures/       # Static data for tests
-  ├── support/        # Reusable layer
-  │   ├── pages/      # Page Object Model (UI Selectors & Actions)
-  │   ├── commands.js # API Custom Commands (Data setup)
-  └── ...
+├── e2e/            # Test specs organized by User Story
+├── fixtures/       # Static assets (images/files for upload tests)
+├── support/
+
+│   ├── pages/      # Page Object Model (Encapsulated Selectors)
+│   ├── commands.js # API Seeding & Login shortcuts
+└── ...
 ```
 
 ---
 
 ## 🚀 3. Advanced Engineering Patterns Applied
 
-* **API Seeding:** Tests use `cy.request()` to create the necessary state (users/products) before UI interaction, ensuring test atomicity and speed.
-* **POM (Page Object Model):** Decouples test logic from UI selectors using a dedicated page layer, making maintenance easier and the code more readable.
-* **Smart Synchronization:** Strategic use of dynamic timeouts and state assertions instead of hardcoded `cy.wait()`, reducing flakiness.
-* **Secure CI/CD:** Integration with GitHub Secrets to inject environment variables during pipeline execution, preventing credential leaks.
+This project implements industry-standard solutions to common automation challenges:
+
+* **Dynamic Admin Creation (Anti-Flakiness):** Instead of relying on a static "admin@test.com", each test suite generates a unique Administrator via API. This prevents **401 Unauthorized** errors caused by shared environment resets.
+* **API Contract Alignment:** Payloads are strictly mapped to the REST API schema (e.g., handling `password` vs `senha` keys), ensuring **400 Bad Request** errors are avoided during data seeding.
+* **Atomic Test Setup:** Using `cy.request()` to create users and products before the test starts. This ensures that if the UI fails, we know it's a front-end bug, not a data setup issue.
+* **HTML5 Validation Testing:** Beyond server errors, the suite validates native browser behaviors like `validationMessage` for invalid email formats.
+* **DOM Traversal Excellence:** Strategic use of `.parent().find()` to interact with specific rows in dynamic tables, ensuring robust element targeting.
 
 ---
 
 ## ⚙️ 4. Getting Started
 
 ### Prerequisites
-* [Node.js](https://nodejs.org/) (Version 18 or higher)
+* [Node.js](https://nodejs.org/) (v18+)
 * [Cypress](https://www.cypress.io/)
 
 ### Installation
@@ -155,24 +156,14 @@ cypress/
     ```bash
     git clone [https://github.com/alicemavila/cypress-agile-eng-showcase.git](https://github.com/alicemavila/cypress-agile-eng-showcase.git)
     ```
-2. Navigate to the project folder:
-    ```bash
-    cd cypress-agile-eng-showcase
-    ```
-3. Install dependencies:
+2. Install dependencies:
     ```bash
     npm install
     ```
 
 ### Running Tests
-* **Open Cypress UI:**
-    ```bash
-    npm run cypress:open
-    ```
-* **Run Headless Mode (Terminal):**
-    ```bash
-    npm run cypress:run
-    ```
+* **Cypress Dashboard (UI):** `npx cypress open`
+* **Headless Mode (CI Simulation):** `npx cypress run`
 
 ---
 

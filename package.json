@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-"cy:open": "cypress open",
-  "cy:run": "cypress run",
-  "test:chrome": "cypress run --browser chrome",
-  "test:auth": "cypress run --spec 'cypress/e2e/auth/*'"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:admin": "cypress run --spec 'cypress/e2e/US03_UserManagement.spec.js'",
+    "test:chrome": "cypress run --browser chrome",
+    "test:edge": "cypress run --browser edge",
+    "test:firefox": "cypress run --browser firefox",
+    "clean:reports": "rm -rf cypress/videos cypress/screenshots",
+    "test:full": "npm run clean:reports && npm run cy:run"
   },
   "keywords": [],
   "author": "",
