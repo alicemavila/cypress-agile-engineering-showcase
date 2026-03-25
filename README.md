@@ -121,7 +121,8 @@ The following User Stories were mapped to guide the automation of this project:
 * **CI/CD:** [GitHub Actions](https://github.com/features/actions) for automated test execution on every push.
 
 ## 📂 Project Structure
-```text
+
+```
 .github/workflows/    # CI/CD Pipeline configuration
 cypress/
   ├── e2e/            # Test files organized by Epic/Feature
@@ -130,7 +131,7 @@ cypress/
   │   ├── pages/      # Page Object Model (UI Selectors & Actions)
   │   ├── commands.js # API Custom Commands (Data setup)
   └── ...
-```text
+```
 
 ---
 
