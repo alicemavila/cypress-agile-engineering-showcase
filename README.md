@@ -130,6 +130,7 @@ cypress/
   │   ├── pages/      # Page Object Model (UI Selectors & Actions)
   │   ├── commands.js # API Custom Commands (Data setup)
   └── ...
+```text
 
 ---
 
