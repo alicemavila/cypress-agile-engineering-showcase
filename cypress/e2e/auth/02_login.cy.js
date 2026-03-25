@@ -4,7 +4,7 @@ describe('US01 - User Authentication', () => {
   const user = {
     nome: Cypress.env('userName'),
     email: Cypress.env('userEmail'),
-    password: Cypress.env('userPassword') 
+    password: Cypress.env('userPassword')
   };
 
   before(() => {
@@ -18,7 +18,7 @@ describe('US01 - User Authentication', () => {
   it('Scenario 1: Successful Login', () => {
     Login.fillForm(user.email, user.password);
     Login.submit();
-    
+
     cy.url().should('include', '/home');
     cy.get('h1', { timeout: 10000 }).should('contain', `Bem Vindo`);
   });
@@ -35,7 +35,7 @@ describe('US01 - User Authentication', () => {
   it('Scenario 3: Login with empty fields', () => {
     Login.submit();
 
-    Login.getErrorMessage().should('have.length.at.least', 2); 
+    Login.getErrorMessage().should('have.length.at.least', 2);
     Login.getErrorMessage().first().should('contain', 'Email é obrigatório');
   });
 
@@ -43,8 +43,15 @@ describe('US01 - User Authentication', () => {
     Login.fillForm('email_sem_arroba', '123456');
     Login.submit();
 
-    cy.get('#email')
-      .invoke('prop', 'validationMessage')
-      .should('contain', 'Inclua um "@"');
+    cy.get('#email').then(($el) => {
+
+      expect($el[0].checkValidity()).to.be.false
+
+      expect($el[0].validity.typeMismatch).to.be.true
+
+      /*cy.get('#email')
+        .invoke('prop', 'validationMessage')
+        .should('contain', 'Inclua um "@"');*/
+    });
   });
 });
