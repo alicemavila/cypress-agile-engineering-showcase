@@ -120,12 +120,14 @@ The following User Stories were mapped to guide the automation of this project:
 
 ## 🛠️ 2. Architecture & Tech Stack
 
-* **Testing Framework:** [Cypress](https://www.cypress.io/)
-* **Data Generation:** [Faker.js](https://fakerjs.dev/) (Ensures test isolation with unique data for every execution).
-* **Design Patterns:** * **Hybrid Approach:** POM (Page Object Model) for UI interactions + Custom Commands for API shortcuts.
-    * **Data Setup via API:** Bypassing UI for pre-conditions to increase execution speed.
-* **Security:** Environment variables managed via `cypress.env.json` and GitHub Secrets.
-* **CI/CD:** [GitHub Actions] for automated regression on every push.
+* **Testing Framework:** [Cypress](https://www.cypress.io/) – Focused on scalable, high-speed, and reliable E2E execution.
+* **Data Generation:** [Faker.js](https://fakerjs.dev/) – Ensures test isolation and deterministic data generation for every test run, preventing dependency issues.
+* **Design Patterns:**
+    * **Hybrid Approach:** Page Object Model (POM) for encapsulated UI interactions combined with Custom Commands for API-driven shortcuts.
+    * **Atomic Test Setup:** Leveraging direct API requests to seed preconditions (bypassing UI), resulting in faster execution and reduced flakiness.
+* **Security:** *Shift-Left Strategy* – Implementation of both client-side native validation and backend security contract testing (e.g., SQL Injection/Payload sanitization). Environment configuration is secured via GitHub Secrets.
+* **CI/CD:** [GitHub Actions] – Automated regression pipeline integrated into the development workflow to ensure fast feedback loops on every commit.
+
 
 ## 📂 Project Structure
 ```
