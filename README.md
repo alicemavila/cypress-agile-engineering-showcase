@@ -165,7 +165,7 @@ This project implements industry-standard solutions to common automation challen
 ### Installation
 1. Clone this repository:
     ```bash
-    git clone [https://github.com/alicemavila/cypress-agile-eng-showcase.git](https://github.com/alicemavila/cypress-agile-eng-showcase.git)
+    git clone (https://github.com/alicemavila/cypress-agile-eng-showcase.git)
     ```
 2. Install dependencies:
     ```bash
