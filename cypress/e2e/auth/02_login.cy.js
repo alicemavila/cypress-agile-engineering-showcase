@@ -20,7 +20,7 @@ describe('US01 - User Authentication', () => {
     Login.submit();
 
     cy.url().should('include', '/home');
-    cy.get('h1', { timeout: 10000 }).should('contain', `Bem Vindo`);
+    cy.get('h1', { timeout: 10000 }).should('contain', 'Bem Vindo');
   });
 
   it('Scenario 2: Login with invalid credentials', () => {
@@ -44,14 +44,43 @@ describe('US01 - User Authentication', () => {
     Login.submit();
 
     cy.get('#email').then(($el) => {
-
-      expect($el[0].checkValidity()).to.be.false
-
-      expect($el[0].validity.typeMismatch).to.be.true
-
-      /*cy.get('#email')
-        .invoke('prop', 'validationMessage')
-        .should('contain', 'Inclua um "@"');*/
+      expect($el[0].checkValidity()).to.be.false;
+      expect($el[0].validity.typeMismatch).to.be.true;
     });
   });
-});
+
+  it('Scenario 5: SQL Injection attempt blocked by frontend', () => {
+    const maliciousEmail = "test@test.com' OR '1'='1";
+
+    Login.fillForm(maliciousEmail, '123456');
+    Login.submit();
+
+    cy.get('#email').then(($el) => {
+      expect($el[0].checkValidity()).to.be.false;
+    });
+
+    cy.url().should('include', '/login');
+  });
+
+it('Scenario 6: SQL Injection via API', () => {
+  cy.request({
+    method: 'POST',
+    url: 'https://serverest.dev/login',
+    failOnStatusCode: false,
+    body: {
+      email: "test@test.com' OR 1=1 --",
+      password: "123456"
+    }
+  }).then((response) => {
+
+    expect(response.status).to.be.oneOf([400, 401]);
+
+    expect(response.body).to.not.have.property('authorization');
+
+    if (response.body && response.body.message) {
+      expect(response.body.message)
+        .to.match(/inválid/i);
+    }
+  });
+})
+})

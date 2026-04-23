@@ -35,6 +35,14 @@ The following User Stories were mapped to guide the automation of this project:
     * **Given** I am on the login page
     * **When** I enter invalid email format
     * **Then** the system should alert "Email deve ser um email válido".
+* **Scenario 5: SQL Injection attempt blocked by frontend**
+     * **Given** I am on the login page
+     * **When** I enter a malicious email containing SQL injection patterns
+     * **Then** the browser should trigger native validation and block the submission, preventing navigation.
+* **Scenario 6: SQL Injection attempt blocked via API**
+     * **Given** I perform an authentication request via API
+     * **When** I send a request containing SQL injection payloads
+     * **Then** the server should return a 400 or 401 status and deny access, ensuring no authorization token is returned.
 
 > **US02 - Product Management (CRUD)**
 > **As a** system administrator,
@@ -65,7 +73,7 @@ The following User Stories were mapped to guide the automation of this project:
 
 ### Epic: User Administration & Shopping Experience
 
-> **US03 - User Management (Admin)**
+> **US03 - User Management (Admin)**                       
 > **As a** system administrator,
 > **I want to** register and manage other users,
 > **So that** I can control access to the platform.
@@ -109,6 +117,7 @@ The following User Stories were mapped to guide the automation of this project:
 
 ---
 
+
 ## 🛠️ 2. Architecture & Tech Stack
 
 * **Testing Framework:** [Cypress](https://www.cypress.io/)
@@ -143,7 +152,9 @@ This project implements industry-standard solutions to common automation challen
 * **HTML5 Validation Testing:** Beyond server errors, the suite validates native browser behaviors like `validationMessage` for invalid email formats.
 * **DOM Traversal Excellence:** Strategic use of `.parent().find()` to interact with specific rows in dynamic tables, ensuring robust element targeting.
 
+
 ---
+
 
 ## ⚙️ 4. Getting Started
 
@@ -165,7 +176,9 @@ This project implements industry-standard solutions to common automation challen
 * **Cypress Dashboard (UI):** `npx cypress open`
 * **Headless Mode (CI Simulation):** `npx cypress run`
 
+
 ---
+
 
 ## 👨‍💻 Author
 **Alice Monteiro** - QA Engineer  
